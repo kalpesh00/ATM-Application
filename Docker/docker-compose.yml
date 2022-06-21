@@ -1,0 +1,26 @@
+version: '3'
+services:
+
+  atm-app:
+    build: ./atm-app
+    image: atm-app
+    container_name: atm-app-container
+    volumes:
+      - app_data:/app/Server/ATM
+    ports:
+      - 8081:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+
+  atm-ui:
+    build: ./atm-ui
+    image: atm-ui
+    container_name: atm-ui-container       
+    ports:
+      - 4200:80
+    restart: always
+    depends_on:
+      - atm-app
+    links:
+      - atm-app  
+      
+volumes:
+  app_data:  
