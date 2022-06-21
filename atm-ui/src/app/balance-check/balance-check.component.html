@@ -1,0 +1,62 @@
+<section class="section-container ml-1 mt-0 p-2">
+    <h5 align="center">Balance Enquiry</h5>
+    <hr />
+    <form [formGroup]="newBalCheckForm" (ngSubmit)="onSubmit()" class="centered">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="accntNo" class="label-width form-label-font text-color-brown">Account Number:</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" formControlName="accntNo"
+                        class="textbox ml-5  form-control form-control-sm input-conn-txt" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="pin" class="label-width form-label-font text-color-brown">PIN:</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" formControlName="pin"
+                        class="textbox ml-5  form-control form-control-sm input-conn-txt" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+                    <button class="button btn btn-primary" (click)="getBalance()" type="submit">Submit</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="button btn btn-info" (click)="resetForm()" type="reset">Clear</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<section class="section-container ml-1 mt-0 p-2">
+    <div *ngIf="errorPresent">
+        <div id="rcorners1">
+            <p>{{errorMessage}}</p>
+        </div>
+    </div>
+    <div *ngIf="infoPresent">
+        <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" id="balanceInfo" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col">Maximum Withdrawal Limit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{balanceData.accountNo}}</th>
+                    <td>{{balanceData.balance}}</td>
+                    <td>{{balanceData.maximumWithdrawalLimit}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
